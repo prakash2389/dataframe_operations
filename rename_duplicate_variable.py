@@ -1,6 +1,25 @@
 import pandas as pd
 
 
+def convert_all_rows_to_field_value(df):
+    # Initialize empty list to store all field-value pairs
+    all_field_values = []
+
+    # Iterate through each row
+    for index, row in df.iterrows():
+        # Create field-value pairs for each column in the row
+        for column in df.columns:
+            field_value_pair = {
+                'Field': column,
+                'Value': row[column]
+            }
+            all_field_values.append(field_value_pair)
+
+    # Convert the list of dictionaries to a dataframe
+    result_df = pd.DataFrame(all_field_values)
+
+    return result_df
+
 def rename_variables(df, column_name):
     """
     Rename values in a specified column by appending _1, _2, etc., if duplicates exist.
